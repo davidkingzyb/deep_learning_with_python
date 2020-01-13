@@ -28,22 +28,12 @@ x_test = vectorize_sequences(test_data)
 y_train = np.asarray(train_labels).astype('float32')
 y_test = np.asarray(test_labels).astype('float32')
 
-# embedding
-# maxlen=20 # use first 20 feature word every data
-# x_train = preprocessing.sequence.pad_sequences(train_data, maxlen=maxlen)
-# x_test = preprocessing.sequence.pad_sequences(test_data, maxlen=maxlen)
-# y_train = np.asarray(train_labels).astype('float32')
-# y_test = np.asarray(test_labels).astype('float32')
-
 x_val = x_train[:10000]
 partial_x_train = x_train[10000:]
 y_val = y_train[:10000]
 partial_y_train = y_train[10000:]
 
 model = models.Sequential()
-
-# model.add(layers.Embedding(10000,8,input_length=maxlen))#embeding
-# model.add(layers.Flatten())
 
 model.add(layers.Dense(16, activation='relu', input_shape=(10000,)))#one hot
 model.add(layers.Dense(16, activation='relu'))
