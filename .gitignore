@@ -1,0 +1,5 @@
+*.h5
+catordog/catordog/*
+imdb/aclImdb/*
+
+imdb/glove.6B.100d.txt
