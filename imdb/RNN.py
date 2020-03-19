@@ -3,7 +3,7 @@ from keras.preprocessing import sequence
 from keras.layers import Dense
 import matplotlib.pyplot as plt
 from keras.models import Sequential
-from keras.layers import Embedding, SimpleRNN, Dense,LSTM
+from keras.layers import Embedding, SimpleRNN, Dense,LSTM,Bidirectional
 
 max_features = 10000  # number of words to consider as features
 maxlen = 500  # cut texts after this number of words (among top max_features most common words)
@@ -15,6 +15,10 @@ print(len(input_train), 'train sequences')
 print(len(input_test), 'test sequences')
 print(input_train[0])
 
+# Reverse sequences
+# input_train = [x[::-1] for x in input_train]
+# input_test = [x[::-1] for x in input_test]
+
 print('Pad sequences (samples x time)')
 input_train = sequence.pad_sequences(input_train, maxlen=maxlen)
 input_test = sequence.pad_sequences(input_test, maxlen=maxlen)
@@ -24,7 +28,8 @@ print('input_test shape:', input_test.shape)
 
 model = Sequential()
 model.add(Embedding(max_features, 32))
-model.add(LSTM(32))
+model.add(Bidirectional(LSTM(32)))
+# model.add(LSTM(32))
 # model.add(SimpleRNN(32))
 model.add(Dense(1, activation='sigmoid'))
 
